@@ -1,0 +1,22 @@
+.tag {
+  display: inline-flex;
+  padding: 1.2rem 1.8rem;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 10rem;
+  background: var(--gray-100, #f2f4f7);
+  mix-blend-mode: multiply;
+}
+
+.text {
+  color: var(--main, #101828);
+  text-align: center;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}

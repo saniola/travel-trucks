@@ -1,0 +1,41 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.1rem;
+}
+
+.label {
+  margin-bottom: 0.8rem;
+  color: var(--gray, #6c717b);
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.inputContainer {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 1.8rem;
+  border-radius: 1.2rem;
+  background-color: var(--inputs, #f7f7f7);
+  gap: 0.8rem;
+}
+
+.input {
+  font-size: var(--fs-base);
+  color: var(--main, #101828);
+  outline: none;
+  border: none;
+  background: none;
+  width: calc(100% - 2rem);
+}
+
+.icon {
+  color: var(--gray, #6c717b);
+  width: 2rem;
+  height: 2rem;
+}
+
+.iconActive {
+  color: var(--main, #101828);
+}
