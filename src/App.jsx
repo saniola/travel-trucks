@@ -3,6 +3,7 @@ import Button from './components/Button/Button';
 import Header from './components/Header/Header';
 import Tag from './components/Tag/Tag';
 import Input from './components/Input/Input';
+import FavoriteButton from './components/FavoriteButton/FavoriteButton';
 
 function App() {
   return (
@@ -30,6 +31,12 @@ function App() {
         name="Location"
       />
       <Input placeholder="Booking Date" withCalendar name="Date" />
+
+      <FavoriteButton isFavorite onToggleFavorite={() => alert('Toggle')} />
+      <FavoriteButton
+        isFavorite={false}
+        onToggleFavorite={() => alert('Toggle')}
+      />
     </>
   );
 }
