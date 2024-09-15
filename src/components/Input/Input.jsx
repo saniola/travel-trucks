@@ -11,18 +11,17 @@ const Input = ({
   type = 'text',
   withCalendar = false,
   name,
+  value,
+  onChange,
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e) => {
-    const { value } = e.target;
-    setInputValue(value);
+    onChange(e);
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    onChange({ target: { name, value: date } });
     setShowCalendar(false);
   };
 
@@ -33,7 +32,7 @@ const Input = ({
         {icon && (
           <span
             className={`${styles.icon} icon ${icon} ${
-              inputValue && styles.iconActive
+              value && styles.iconActive
             }`}
           />
         )}
@@ -43,12 +42,12 @@ const Input = ({
             placeholder={placeholder}
             className={styles.input}
             name={name}
-            value={inputValue}
+            value={value}
             onChange={handleInputChange}
           />
         ) : (
           <DatePicker
-            selected={selectedDate}
+            selected={value}
             onChange={handleDateChange}
             placeholderText={placeholder}
             className={styles.input}
@@ -70,6 +69,8 @@ Input.propTypes = {
   type: PropTypes.string,
   withCalendar: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Input;

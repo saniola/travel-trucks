@@ -4,7 +4,7 @@ import styles from './FavoriteButton.module.scss';
 const FavoriteButton = ({ isFavorite, onToggleFavorite }) => {
   return (
     <button
-      className={`${styles.button} ${isFavorite ? styles.favorited : ''}`}
+      className={`${styles.button} ${isFavorite && styles.favorited}`}
       onClick={onToggleFavorite}
     >
       <span className="icon icon-heart" />

@@ -1,0 +1,41 @@
+.component {
+  display: inline-flex;
+  padding: 0 1.2rem;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--gray-light, #dadde1);
+  mix-blend-mode: multiply;
+  width: 11.2rem;
+  height: 9.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &.active {
+    border: 1px solid var(--button, #e44848);
+  }
+
+  &:hover {
+    border: 1px solid var(--button, #e44848);
+  }
+}
+
+.icon {
+  font-size: 3.2rem;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.checkbox {
+  display: none;
+}
+
+.text {
+  color: var(--main, #101828);
+  text-align: center;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.08px;
+}

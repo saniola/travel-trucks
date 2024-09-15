@@ -1,0 +1,61 @@
+.component {
+  display: flex;
+  flex-direction: column;
+
+  &.right {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .priceFavorite {
+      align-self: flex-start;
+    }
+  }
+}
+
+.title {
+  margin-bottom: 0.8rem;
+}
+
+.info {
+  display: flex;
+  gap: 1.6rem;
+  line-height: 2.4rem;
+  margin-bottom: 1.6rem;
+}
+
+.star {
+  color: var(--rating, #f7b500);
+  width: 1.6rem;
+  height: 1.6rem;
+  text-decoration: none;
+}
+
+.map {
+  color: var(--main, #101828);
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.infoItem {
+  color: var(--Main, #101828);
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.rating {
+  text-decoration-line: underline;
+}
+
+.main {
+  color: var(--main, #101828);
+  font-size: var(--fs-md, 2.4rem);
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.priceFavorite {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}

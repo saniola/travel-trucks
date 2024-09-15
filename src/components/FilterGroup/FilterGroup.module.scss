@@ -1,0 +1,23 @@
+.component {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: var(--Main, #101828);
+  font-size: var(--fs-sm, 2rem);
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.divider {
+  height: 0.1rem;
+  background-color: var(--gray-light, #dadde1);
+  margin: 2.4rem 0;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}

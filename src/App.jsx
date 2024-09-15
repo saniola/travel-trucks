@@ -1,44 +1,21 @@
-import './App.module.scss';
-import Button from './components/Button/Button';
+import { Routes, Route } from 'react-router-dom'; // Тільки Routes та Route, без Router
+import Home from './pages/Home/Home';
+import Catalog from './pages/Catalog/Catalog';
+import Details from './pages/Details/Details';
 import Header from './components/Header/Header';
-import Tag from './components/Tag/Tag';
-import Input from './components/Input/Input';
-import FavoriteButton from './components/FavoriteButton/FavoriteButton';
 
-function App() {
+const App = () => {
   return (
     <>
       <Header />
-      <Button text="Search" onClick={() => alert('Search')} />
-      <Button
-        text="Load More"
-        onClick={() => alert('Load More')}
-        variant="secondary"
-      />
-      <Tag text="Automatic" />
-      <Tag text="AC" />
-      <Tag text="Petrol" />
-      <Tag text="Kitchen" />
-      <Tag text="Radio" />
-      <Tag text="Bathroom" />
-      <Tag text="2 adults" />
-
-      <Input placeholder="Name*" name="Name" />
-      <Input
-        label="Location"
-        placeholder="City"
-        icon="icon-map"
-        name="Location"
-      />
-      <Input placeholder="Booking Date" withCalendar name="Date" />
-
-      <FavoriteButton isFavorite onToggleFavorite={() => alert('Toggle')} />
-      <FavoriteButton
-        isFavorite={false}
-        onToggleFavorite={() => alert('Toggle')}
-      />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/item/:id" element={<Details />} />
+        <Route path="/catalog/:id/reviews" element={<Details showReviews />} />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;

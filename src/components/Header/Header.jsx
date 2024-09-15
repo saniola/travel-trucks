@@ -6,13 +6,14 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Link to="/home">
+        <Link to="/">
           <img src={logo} alt="TravelTrucks Logo" width="136" height="16" />
         </Link>
       </div>
       <nav className={styles.nav}>
         <NavLink
-          to="/home"
+          to="/"
+          end
           className={({ isActive }) => (isActive ? styles.active : '')}
         >
           Home

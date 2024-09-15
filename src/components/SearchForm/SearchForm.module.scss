@@ -1,0 +1,19 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  max-width: 35.2rem;
+  min-width: 35.2rem;
+  gap: 4rem;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.filtersTitle {
+  color: var(--text, #475467);
+  font-weight: 500;
+  line-height: 24px;
+}

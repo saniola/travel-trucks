@@ -24,11 +24,10 @@ const getIconClass = (text) => {
 
 const Tag = ({ text }) => {
   const iconClass = getIconClass(text);
-  console.log(iconClass);
 
   return (
     <div className={styles.tag}>
-      <span className={`${styles.icon} icon ${iconClass}`} />{' '}
+      <span className={`${styles.icon} icon ${iconClass}`} />
       <span className={styles.text}>{text}</span>
     </div>
   );
