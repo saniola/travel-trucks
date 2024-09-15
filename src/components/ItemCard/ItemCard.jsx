@@ -27,16 +27,6 @@ const ItemCard = ({ item }) => {
     navigate(`/catalog/${item.id}/reviews`);
   };
 
-  const tags = [
-    { key: 'automatic', label: 'Automatic' },
-    { key: 'AC', label: 'AC' },
-    { key: 'petrol', label: 'Petrol' },
-    { key: 'kitchen', label: 'Kitchen' },
-    { key: 'radio', label: 'Radio' },
-    { key: 'bathroom', label: 'Bathroom' },
-    { key: '2 adults', label: '2 Adults' },
-  ].filter((tag) => item[tag.key]);
-
   return (
     <div className={styles.component}>
       <img src={gallery[0]?.thumb || ''} alt={name} className={styles.image} />
@@ -53,7 +43,7 @@ const ItemCard = ({ item }) => {
           onReviewsClick={handleReviewsClick}
         />
         <div className={styles.description}>{description}</div>
-        <TagsGroup tags={tags} />
+        <TagsGroup item={item} />
         <div className={styles.button}>
           <Button variant="primary" onClick={handleShowMoreClick}>
             Show more

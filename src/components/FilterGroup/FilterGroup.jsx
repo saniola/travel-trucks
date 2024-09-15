@@ -6,7 +6,7 @@ const FilterGroup = ({ title, filters, onFilterChange }) => {
   return (
     <div className={styles.component}>
       <h3 className={styles.title}>{title}</h3>
-      <span className={styles.divider}></span>
+      <span className="divider"></span>
       <div className={styles.items}>
         {filters.map((filter) => (
           <FilterItem

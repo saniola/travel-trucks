@@ -8,9 +8,7 @@ const ItemList = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(true);
-
   const isFetching = useRef(false);
 
   const fetchItems = async () => {
@@ -23,8 +21,6 @@ const ItemList = () => {
       );
       const data = await response.json();
       const { total, items: newItems } = data;
-
-      setTotal(total);
 
       const filteredNewItems = newItems.filter(
         (newItem) => !items.some((item) => item.id === newItem.id)

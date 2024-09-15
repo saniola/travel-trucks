@@ -1,0 +1,35 @@
+.features {
+  display: flex;
+  padding: 4.4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  border-radius: 10px;
+  background: var(--inputs, #f7f7f7);
+}
+
+.details {
+  width: 100%;
+}
+
+.detailsTitle {
+  color: var(--main, #101828);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.detailItem {
+  color: var(--main, #101828);
+  font-weight: 500;
+  line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+}
