@@ -28,7 +28,6 @@ const initialValues = {
 
 const BookingForm = () => {
   const onFormSubmit = (values, { resetForm }) => {
-    console.log(values);
     toast.success('Your booking was received', {
       position: 'top-right',
       autoClose: 3000,

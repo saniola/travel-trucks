@@ -1,8 +1,11 @@
 import { NavLink, Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import logo from '../../assets/logo.svg';
+import { useSelector } from 'react-redux';
+import { selectFavorites } from '../../redux/campersSlice';
 
 const Header = () => {
+  const favorites = useSelector(selectFavorites);
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -24,6 +27,15 @@ const Header = () => {
         >
           Catalog
         </NavLink>
+
+        {favorites.length > 0 && (
+          <NavLink
+            to="/favorites"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+          >
+            Favorites
+          </NavLink>
+        )}
       </nav>
     </header>
   );

@@ -21,7 +21,7 @@ const ItemHeader = ({
   const getReviewText = (count) => (count === 1 ? 'review' : 'reviews');
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-  const isFavorite = favorites.includes(id);
+  const isFavorite = favorites.some((fav) => fav.id === id);
 
   const handleToggleFavorite = () => {
     if (isFavorite) {

@@ -33,9 +33,6 @@ const SearchForm = () => {
         return acc;
       }, {});
 
-    console.log(filterParams);
-    console.log(location);
-
     dispatch(
       filterCampers({
         location,

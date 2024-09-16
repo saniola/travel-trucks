@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,7 +14,7 @@ import Button from '../Button/Button';
 import styles from './ItemList.module.scss';
 import Loader from '../Loader/Loader';
 
-const ItemList = () => {
+const ItemList = ({ favoritePage }) => {
   const dispatch = useDispatch();
   const items = useSelector(selectCampers);
   const loading = useSelector(selectIsLoading);
@@ -28,15 +29,15 @@ const ItemList = () => {
     dispatch(loadMoreCampers());
   };
 
-  console.log('favorites', favorites); // eslint-disable-line
+  const arr = favoritePage ? favorites : items;
 
   return (
     <div className={styles.component}>
-      {items.map((item) => (
+      {arr.map((item) => (
         <ItemCard key={item.id} item={item} />
       ))}
       {loading && <Loader />}
-      {!loading && showLoadMore && (
+      {!loading && showLoadMore && !favoritePage && (
         <div className={styles.button}>
           <Button variant="secondary" onClick={handleShowMore}>
             Load more
@@ -45,6 +46,10 @@ const ItemList = () => {
       )}
     </div>
   );
+};
+
+ItemList.propTypes = {
+  favoritePage: PropTypes.bool,
 };
 
 export default ItemList;

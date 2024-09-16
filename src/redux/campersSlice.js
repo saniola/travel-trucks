@@ -13,12 +13,16 @@ const campersSlice = createSlice({
   },
   reducers: {
     addToFavorites(state, action) {
-      if (!state.favorites.includes(action.payload)) {
-        state.favorites.push(action.payload);
+      if (!state.favorites.some((item) => item.id === action.payload)) {
+        state.favorites.push(
+          state.items.find((item) => item.id === action.payload)
+        );
       }
     },
     deleteFromFavorites(state, action) {
-      state.favorites = state.favorites.filter((id) => id !== action.payload);
+      state.favorites = state.favorites.filter(
+        (item) => item.id !== action.payload
+      );
     },
     resetCampers(state) {
       state.itemsToShow = 4;
