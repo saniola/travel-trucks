@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import Button from '../Button/Button';
-import ClipLoader from 'react-spinners/ClipLoader';
 import styles from './ItemList.module.scss';
+import Loader from '../Loader/Loader';
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -56,11 +56,7 @@ const ItemList = () => {
       {items.map((item) => (
         <ItemCard key={item.id} item={item} />
       ))}
-      {loading && (
-        <div className={styles.loader}>
-          <ClipLoader color="var(--button)" size={50} />
-        </div>
-      )}
+      {loading && <Loader />}
       {!loading && hasMore && (
         <div className={styles.button}>
           <Button variant="secondary" onClick={handleShowMore}>

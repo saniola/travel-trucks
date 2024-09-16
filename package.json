@@ -12,15 +12,19 @@
   },
   "dependencies": {
     "date-fns": "^4.0.0-beta.1",
+    "formik": "^2.4.6",
     "nanoid": "^5.0.7",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-datepicker": "^7.3.0",
     "react-dom": "^18.3.1",
+    "react-modal-image": "^2.6.0",
     "react-router-dom": "^6.26.2",
     "react-spinners": "^0.14.1",
-    "sass": "^1.78.0"
+    "react-toastify": "^10.0.5",
+    "sass": "^1.78.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

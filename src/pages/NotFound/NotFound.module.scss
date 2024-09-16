@@ -1,0 +1,19 @@
+.component {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: calc(100vh - 7.3rem);
+  width: 100%;
+  overflow: hidden;
+  padding-top: 10vh;
+}
+
+.header {
+  font-size: 10rem;
+  margin-bottom: 3rem;
+}
+
+.subheader {
+  font-size: var(--fs-lg);
+}

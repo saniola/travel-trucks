@@ -15,13 +15,6 @@
   overflow: hidden;
 }
 
-.image {
-  width: 29.2rem;
-  height: 32rem;
-  border-radius: 1.6rem;
-  object-fit: cover;
-}
-
 .button {
   margin-top: auto;
 }
@@ -33,5 +26,4 @@
   text-overflow: ellipsis;
   max-width: 100%;
   color: var(--text, #475467);
-  line-height: 24px;
 }

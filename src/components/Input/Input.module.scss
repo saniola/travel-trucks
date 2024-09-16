@@ -8,7 +8,6 @@
   margin-bottom: 0.8rem;
   color: var(--gray, #6c717b);
   font-weight: 400;
-  line-height: 24px;
 }
 
 .inputContainer {
@@ -38,4 +37,9 @@
 
 .iconActive {
   color: var(--main, #101828);
+}
+
+.textarea {
+  resize: none;
+  height: 100px;
 }

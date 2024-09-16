@@ -29,7 +29,7 @@ const ItemCard = ({ item }) => {
 
   return (
     <div className={styles.component}>
-      <img src={gallery[0]?.thumb || ''} alt={name} className={styles.image} />
+      <img src={gallery[0]?.thumb || ''} alt={name} className="thumbnail" />
       <div className={styles.content}>
         <ItemHeader
           title={name}

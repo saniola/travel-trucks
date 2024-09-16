@@ -6,9 +6,11 @@ const Button = ({
   onClick,
   variant = 'primary',
   validation = true,
+  type = 'button',
 }) => {
   return (
     <button
+      type={type}
       className={`${styles.button} ${styles[variant]} ${
         !validation ? styles.disabled : ''
       }`}
@@ -25,6 +27,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   variant: PropTypes.oneOf(['primary', 'secondary']),
   validation: PropTypes.bool,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
 };
 
 export default Button;

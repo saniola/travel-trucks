@@ -1,0 +1,35 @@
+.component {
+  border-radius: 1rem;
+  border: 0.1rem solid var(--gray-light, #dadde1);
+  display: flex;
+  padding: 4.4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
+.title {
+  color: var(--main, #101828);
+  font-family: Inter;
+  font-size: var(--fs-sm, 2rem);
+  font-weight: 600;
+
+  margin-bottom: 0.8rem;
+}
+
+.subtitle {
+  color: var(--gray, #6c717b);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

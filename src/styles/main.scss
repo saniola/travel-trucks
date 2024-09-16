@@ -11,12 +11,12 @@
 
 html {
   font-size: 62.5%;
+  line-height: 2.4rem;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: var(--fs-base);
-  line-height: 1.6;
 }
 
 h1,
