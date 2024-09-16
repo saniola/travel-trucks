@@ -56,7 +56,7 @@ const campersSlice = createSlice({
 
             switch (filterKey) {
               case 'ac':
-                return item.ac === filterValue;
+                return item.ac.toLowerCase() === filterValue;
               case 'automatic':
                 return (
                   (item.transmission.toLowerCase() === 'automatic') ===
@@ -65,18 +65,13 @@ const campersSlice = createSlice({
               case 'kitchen':
                 return item.kitchen === filterValue;
               case 'tv':
-                return item.tv === filterValue;
+                return item.tv.toLowerCase() === filterValue;
               case 'bathroom':
                 return item.bathroom === filterValue;
               case 'van':
-                return (
-                  (item.form.toLowerCase() === 'paneltruck') === filterValue
-                );
+                return (item.form === 'panelTruck') === filterValue;
               case 'fully-integrated':
-                return (
-                  (item.form.toLowerCase() === 'fully integrated') ===
-                  filterValue
-                );
+                return (item.form === 'fullyIntegrated') === filterValue;
               case 'alcove':
                 return (item.form.toLowerCase() === 'alcove') === filterValue;
               case 'location':
