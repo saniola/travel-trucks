@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   NavLink,
+  Navigate,
   useNavigate,
 } from 'react-router-dom';
 import ItemHeader from '../../components/ItemHeader/ItemHeader';
@@ -115,6 +116,8 @@ const Details = () => {
               path="reviews"
               element={<ReviewGroup reviews={item.reviews} />}
             />
+
+            <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Routes>
 
           <BookingForm />
