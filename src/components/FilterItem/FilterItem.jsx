@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import styles from './FilterItem.module.scss';
 
-const FilterItem = ({ filter, onFilterChange }) => {
+const FilterItem = ({ filter, onFilterChange, isRadio, name }) => {
   const handleClick = () => {
-    onFilterChange(filter.id);
+    onFilterChange(filter.id, filter.type);
   };
 
   return (
@@ -14,7 +14,8 @@ const FilterItem = ({ filter, onFilterChange }) => {
       <span className={`${styles.icon} icon ${filter.iconName}`}></span>
       <input
         className={styles.checkbox}
-        type="checkbox"
+        type={isRadio ? 'radio' : 'checkbox'}
+        name={isRadio ? name : filter.name}
         checked={filter.isChecked}
         onChange={handleClick}
       />
@@ -30,8 +31,11 @@ FilterItem.propTypes = {
     isChecked: PropTypes.bool.isRequired,
     iconName: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
   }).isRequired,
   onFilterChange: PropTypes.func.isRequired,
+  isRadio: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 export default FilterItem;
