@@ -18,7 +18,7 @@ const FilterItem = ({ filter, onFilterChange }) => {
         checked={filter.isChecked}
         onChange={handleClick}
       />
-      <span className={styles.text}>{filter.name}</span>
+      <span className={styles.text}>{filter.label}</span>
     </div>
   );
 };
@@ -29,6 +29,7 @@ FilterItem.propTypes = {
     name: PropTypes.string.isRequired,
     isChecked: PropTypes.bool.isRequired,
     iconName: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }).isRequired,
   onFilterChange: PropTypes.func.isRequired,
 };
