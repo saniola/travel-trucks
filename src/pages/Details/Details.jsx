@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   useParams,
   Routes,
@@ -13,52 +13,35 @@ import Features from '../../components/Features/Features';
 import ReviewGroup from '../../components/ReviewGroup/ReviewGroup';
 import ModalImage from 'react-modal-image';
 import styles from './Details.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSingleItem, selectIsLoading } from '../../redux/campersSlice';
+import { fetchSingleItem } from '../../redux/campersOps';
 import BookingForm from '../../components/BookingForm/BookingForm';
 
 const Details = () => {
   const { id } = useParams();
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [favorite, setFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const item = useSelector(selectSingleItem);
+  const loading = useSelector(selectIsLoading);
   const navigate = useNavigate();
 
-  const handleToggleFavorite = () => {
-    setFavorite((prev) => !prev);
-  };
-
   const handleReviewsClick = () => {
+    if (!item) return;
     navigate(`/catalog/${item.id}/reviews`);
   };
 
   useEffect(() => {
-    const fetchItem = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers/${id}`
-        );
-        const data = await response.json();
-        setItem(data);
-      } catch (error) {
-        console.error('Failed to fetch item:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (id) {
+      dispatch(fetchSingleItem(id));
+    }
+  }, [dispatch, id]);
 
-    fetchItem();
-  }, [id]);
+  if (loading) {
+    return <Loader />;
+  }
 
-  if (loading || !item) {
-    return (
-      <div className={styles.loader}>
-        {loading ? (
-          <Loader />
-        ) : (
-          <p className={styles.notFound}>Item not found</p>
-        )}
-      </div>
-    );
+  if (!item) {
+    return <p>Item not found</p>;
   }
 
   return (
@@ -71,8 +54,6 @@ const Details = () => {
           reviewsCount={item.reviews.length}
           location={item.location}
           price={item.price}
-          isFavorite={favorite}
-          onToggleFavorite={handleToggleFavorite}
           pricePosition="bottom"
           onReviewsClick={handleReviewsClick}
         />
@@ -116,7 +97,6 @@ const Details = () => {
               path="reviews"
               element={<ReviewGroup reviews={item.reviews} />}
             />
-
             <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Routes>
 

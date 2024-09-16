@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ItemHeader from '../ItemHeader/ItemHeader';
 import TagsGroup from '../TagsGroup/TagsGroup';
@@ -7,24 +6,16 @@ import Button from '../Button/Button';
 import styles from './ItemCard.module.scss';
 
 const ItemCard = ({ item }) => {
-  const { name, rating, reviews, location, price, description, gallery } = item;
-  console.log(item);
-
-  const [favorite, setFavorite] = useState(false);
+  const { name, rating, reviews, location, price, description, gallery, id } =
+    item;
   const navigate = useNavigate();
 
-  const handleToggleFavorite = () => {
-    setFavorite((prev) => !prev);
-  };
-
   const handleShowMoreClick = () => {
-    console.log('Show more');
-    navigate(`/catalog/${item.id}`);
+    navigate(`/catalog/${id}`);
   };
 
   const handleReviewsClick = () => {
-    console.log('Show reviews');
-    navigate(`/catalog/${item.id}/reviews`);
+    navigate(`/catalog/${id}/reviews`);
   };
 
   return (
@@ -32,13 +23,12 @@ const ItemCard = ({ item }) => {
       <img src={gallery[0]?.thumb || ''} alt={name} className="thumbnail" />
       <div className={styles.content}>
         <ItemHeader
+          id={id}
           title={name}
           rating={rating}
           reviewsCount={reviews.length}
           location={location}
           price={price}
-          isFavorite={favorite}
-          onToggleFavorite={handleToggleFavorite}
           pricePosition="right"
           onReviewsClick={handleReviewsClick}
         />

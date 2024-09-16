@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+
 import styles from './FavoriteButton.module.scss';
 
-const FavoriteButton = ({ isFavorite, onToggleFavorite }) => {
+const FavoriteButton = ({ isFavorite, handleToggleFavorite }) => {
   return (
     <button
-      className={`${styles.button} ${isFavorite && styles.favorited}`}
-      onClick={onToggleFavorite}
+      className={`${styles.button} ${isFavorite ? styles.favorited : ''}`}
+      onClick={handleToggleFavorite}
     >
       <span className="icon icon-heart" />
     </button>
@@ -14,7 +15,7 @@ const FavoriteButton = ({ isFavorite, onToggleFavorite }) => {
 
 FavoriteButton.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
+  handleToggleFavorite: PropTypes.func.isRequired,
 };
 
 export default FavoriteButton;

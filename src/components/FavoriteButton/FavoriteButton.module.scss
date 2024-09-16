@@ -8,17 +8,14 @@
   width: 2.4rem;
   height: 2.4rem;
   font-size: var(--fs-md, 2.4rem);
+
+  &.favorited,
+  &:hover {
+    color: var(--button, #e44848);
+  }
 }
 
 .icon {
   width: 2.4rem;
   height: 2.4rem;
-}
-
-.button:hover {
-  color: var(--button-hover, #d84343);
-}
-
-.favorited {
-  color: var(--button, #e44848);
 }
