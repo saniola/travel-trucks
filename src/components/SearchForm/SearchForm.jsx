@@ -2,47 +2,60 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import FilterGroup from '../FilterGroup/FilterGroup';
 import Button from '../Button/Button';
-import { equipmentFilters, vehicleTypeFilters } from '../../data/filtersData';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  changeLocation,
+  toggleFilter,
+  selectFilters,
+  selectLocation,
+} from '../../redux/filtersSlice';
+import { resetCampers, filterCampers } from '../../redux/campersSlice';
 import styles from './SearchForm.module.scss';
-import { useState } from 'react';
 
 const SearchForm = () => {
-  const [filters, setFilters] = useState({
-    equipment: equipmentFilters,
-    vehicleType: vehicleTypeFilters,
-  });
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilters);
+  const location = useSelector(selectLocation);
 
-  const handleFilterChange = (group, id) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [group]: prevFilters[group].map((filter) =>
-        filter.id === id ? { ...filter, isChecked: !filter.isChecked } : filter
-      ),
-    }));
+  const handleFilterChange = (id, group) => {
+    dispatch(toggleFilter({ id, group }));
+  };
+
+  const handleLocationChange = (event) => {
+    dispatch(changeLocation(event.target.value));
+  };
+
+  const handleSubmit = () => {
+    const filterParams = filters
+      .filter((filter) => filter.isChecked)
+      .reduce((acc, filter) => {
+        acc[filter.name] = true;
+        return acc;
+      }, {});
+
+    console.log(filterParams);
+    console.log(location);
+
+    dispatch(
+      filterCampers({
+        location,
+        ...filterParams,
+      })
+    );
   };
 
   return (
     <Formik
       initialValues={{
-        location: '',
+        location: location || '',
       }}
       validationSchema={Yup.object({
-        location: Yup.string()
-          .min(2, 'The city must be at least 2 characters long')
-          .required('This field is required'),
+        location: Yup.string().min(
+          2,
+          'The city must be at least 2 characters long'
+        ),
       })}
-      onSubmit={(values) => {
-        const selectedFilters = {
-          location: values.location,
-          equipment: filters.equipment
-            .filter((item) => item.isChecked)
-            .map((item) => item.name),
-          vehicleType: filters.vehicleType
-            .filter((item) => item.isChecked)
-            .map((item) => item.name),
-        };
-        console.log('params:', selectedFilters);
-      }}
+      onSubmit={handleSubmit}
     >
       {({ values }) => (
         <Form className={styles.component}>
@@ -50,13 +63,17 @@ const SearchForm = () => {
             <label className="label">Location</label>
             <div className="input-container">
               <span
-                className={`icon icon-map ${values.location && 'icon-active'}`}
+                className={`input-icon icon-map ${
+                  values.location ? 'icon-active' : ''
+                }`}
               />
               <Field
                 type="text"
                 name="location"
                 placeholder="City"
                 autoComplete="off"
+                value={location}
+                onChange={handleLocationChange}
               />
             </div>
             <ErrorMessage name="location" component="span" className="error" />
@@ -65,14 +82,14 @@ const SearchForm = () => {
           <div className={styles.filters}>
             <h3 className={styles.filtersTitle}>Filters</h3>
             <FilterGroup
-              title="Vehicle equipment"
-              filters={filters.equipment}
-              onFilterChange={(id) => handleFilterChange('equipment', id)}
+              title="Vehicle Equipment"
+              filters={filters.filter((filter) => filter.type === 'equipment')}
+              onFilterChange={handleFilterChange}
             />
             <FilterGroup
-              title="Vehicle type"
-              filters={filters.vehicleType}
-              onFilterChange={(id) => handleFilterChange('vehicleType', id)}
+              title="Vehicle Type"
+              filters={filters.filter((filter) => filter.type === 'vehicle')}
+              onFilterChange={(id) => handleFilterChange(id, 'vehicle')}
             />
           </div>
 

@@ -78,12 +78,23 @@ const filtersSlice = createSlice({
       state.location = action.payload;
     },
     toggleFilter(state, action) {
-      const { id } = action.payload;
+      const { id, group } = action.payload;
+
+      if (group === 'vehicle') {
+        state.filters = state.filters.map((filter) => {
+          if (filter.type === 'vehicle' && filter.id !== id) {
+            filter.isChecked = false;
+          }
+          return filter;
+        });
+      }
+
       const filter = state.filters.find((filter) => filter.id === id);
       if (filter) {
         filter.isChecked = !filter.isChecked;
       }
     },
+
     resetFilters(state) {
       state.location = '';
       state.filters.forEach((filter) => (filter.isChecked = false));
@@ -94,8 +105,6 @@ const filtersSlice = createSlice({
 export const { changeLocation, toggleFilter, resetFilters } =
   filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;
-
-// Селектори для отримання даних фільтрів
 export const selectFilters = (state) => state.filters.filters;
 export const selectLocation = (state) => state.filters.location;
 export const selectActiveFilters = (state) =>

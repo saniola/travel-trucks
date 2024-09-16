@@ -8,10 +8,8 @@ const campersSlice = createSlice({
     favorites: [],
     loading: false,
     singleItem: null,
-    total: 0,
-    hasMore: false,
-    page: 1,
-    showLoadMore: false,
+    itemsToShow: 4, // Початкова кількість елементів для показу
+    filteredItems: [], // Відфільтровані елементи
   },
   reducers: {
     addToFavorites(state, action) {
@@ -23,26 +21,83 @@ const campersSlice = createSlice({
       state.favorites = state.favorites.filter((id) => id !== action.payload);
     },
     resetCampers(state) {
-      state.items = [];
-      state.page = 1;
-      state.total = 0;
-      state.hasMore = false;
-      state.showLoadMore = false; // Скидаємо showLoadMore
+      state.itemsToShow = 4;
+      state.filteredItems = [];
     },
     loadMoreCampers(state) {
-      state.page += 1;
+      state.itemsToShow += 4;
     },
-    applyFilters(state, action) {
-      const { filters, location } = action.payload;
+    filterCampers(state, action) {
+      const filters = action.payload;
+      console.log('filters', filters); // eslint-disable-line
 
+      // Якщо жоден фільтр не активний, повертаємо всі елементи
+      const hasActiveFilters = Object.values(filters).some((value) => value);
+      console.log('hasActiveFilters', hasActiveFilters); // eslint-disable-line
+
+      if (!hasActiveFilters) {
+        console.log('def'); // eslint-disable-line
+        state.filteredItems = state.items;
+        return;
+      }
+
+      // Перетворення значень фільтрів на нижній регістр
+      const normalizedFilters = {};
+      for (const [key, value] of Object.entries(filters)) {
+        if (typeof value === 'string') {
+          normalizedFilters[key] = value.toLowerCase();
+        } else {
+          normalizedFilters[key] = value;
+        }
+      }
+
+      console.log('normalizedFilters', normalizedFilters); // eslint-disable-line
+      console.log('state.items', state.items); // eslint-disable-line
+
+      // Фільтрація елементів
       state.filteredItems = state.items.filter((item) => {
-        const matchesLocation = location
-          ? item.location.includes(location)
-          : true;
-        const matchesFilters = filters.every(
-          (filter) => item[filter.label] === true
+        console.log('item', item); // eslint-disable-line
+        const matches = Object.entries(normalizedFilters).every(
+          ([filterKey, filterValue]) => {
+            if (filterKey === 'location' && !filterValue) return true; // Пропускаємо порожню локацію
+
+            switch (filterKey) {
+              case 'ac':
+                return item.ac === filterValue;
+              case 'automatic':
+                return (
+                  (item.transmission.toLowerCase() === 'automatic') ===
+                  filterValue
+                );
+              case 'kitchen':
+                return item.kitchen === filterValue;
+              case 'tv':
+                return item.tv === filterValue;
+              case 'bathroom':
+                return item.bathroom === filterValue;
+              case 'van':
+                return (
+                  (item.form.toLowerCase() === 'paneltruck') === filterValue
+                );
+              case 'fully-integrated':
+                return (
+                  (item.form.toLowerCase() === 'fully integrated') ===
+                  filterValue
+                );
+              case 'alcove':
+                return (item.form.toLowerCase() === 'alcove') === filterValue;
+              case 'location':
+                return filterValue
+                  ? item.location.toLowerCase().includes(filterValue)
+                  : true;
+              default:
+                return true; // Пропускаємо невідомі фільтри
+            }
+          }
         );
-        return matchesLocation && matchesFilters;
+
+        console.log('matches', matches); // eslint-disable-line
+        return matches;
       });
     },
   },
@@ -53,13 +108,8 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
-        const newItems = action.payload.items.filter(
-          (newItem) => !state.items.some((item) => item.id === newItem.id)
-        );
-        state.items = [...state.items, ...newItems];
-        state.total = action.payload.total;
-        state.hasMore = state.items.length < state.total;
-        state.showLoadMore = state.items.length < state.total; // Визначаємо, чи показувати кнопку
+        state.items = action.payload.items;
+        state.filteredItems = action.payload.items; // За замовчуванням фільтровані = всі
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
@@ -84,17 +134,15 @@ export const {
   deleteFromFavorites,
   loadMoreCampers,
   resetCampers,
-  applyFilters,
-  яґ,
+  filterCampers,
 } = campersSlice.actions;
 
 export const campersReducer = campersSlice.reducer;
 
-export const selectCampers = (state) => state.campers.items;
+export const selectCampers = (state) =>
+  state.campers.filteredItems.slice(0, state.campers.itemsToShow); // Повертаємо відфільтровані елементи
 export const selectFavorites = (state) => state.campers.favorites;
 export const selectIsLoading = (state) => state.campers.loading;
 export const selectSingleItem = (state) => state.campers.singleItem;
-export const selectTotalCampers = (state) => state.campers.total;
-export const selectHasMore = (state) => state.campers.hasMore;
-export const selectPage = (state) => state.campers.page;
-export const selectShowLoadMore = (state) => state.campers.showLoadMore; // Додаємо селектор для showLoadMore
+export const selectShowLoadMore = (state) =>
+  state.campers.itemsToShow < state.campers.filteredItems.length;
