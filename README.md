@@ -1,62 +1,46 @@
-# Travel Trucks
+# travel-trucks
 
-Welcome to **Travel Trucks**, a project aimed at providing users with a comprehensive catalog of campervans available for rent. Users can view detailed information about each campervan, read reviews, filter based on specific features, and even make bookings directly through the platform.
+A React SPA for browsing and booking campervans, with filtering, favorites, and a booking form.
 
-## Project Overview
+## Features
 
-Travel Trucks is a web application that allows users to explore a variety of campervans with detailed specifications, images, and user reviews. The platform provides functionality to filter campervans based on features such as vehicle type, equipment, and location, ensuring users can find exactly what they're looking for. Additionally, users can save their favorite campervans and make bookings with ease.
+- Campervan catalog with pagination fetched from a REST API
+- Filter by location, vehicle type, and equipment
+- Detail page with specifications, gallery, reviews, and booking form
+- Favorites list persisted to local storage via Redux Persist
+- Booking form with date picker and Formik/Yup validation
 
-## Technologies Used
+## Stack
 
-The project is built using the following technologies:
+- React 18 with React Router 6
+- Redux Toolkit with redux-persist for favorites state
+- Axios for API requests
+- Formik + Yup for form validation
+- SCSS modules for styling
+- Vite build tool
 
-- **React**: A JavaScript library for building user interfaces.
-- **Redux Toolkit**: For state management, including asynchronous actions with `createAsyncThunk`.
-- **React Router**: For navigation within the application.
-- **Formik & Yup**: For form handling and validation.
-- **React Toastify**: For displaying notifications.
-- **React Modal Image**: For lightbox functionality to display images.
-- **Axios**: For making API requests.
-- **SASS/SCSS**: For styling the application.
-- **Redux Persist**: For persisting state in local storage, specifically for saving favorites.
+## Project structure
 
-## Getting Started
+```
+src/
+  components/     # reusable UI components
+  pages/          # Catalog, Details, Favorites, Home, NotFound
+  redux/          # store, campersSlice, filtersSlice, campersOps
+  assets/         # icons and images
+  styles/         # global styles
+```
 
-Follow these instructions to set up and run the project locally.
+## Run locally
 
-### Prerequisites
+```bash
+npm install
+npm run dev
+```
 
-Ensure you have the following installed:
+Opens at http://localhost:5173.
 
-- Node.js (v14 or higher recommended)
-- npm (v6 or higher recommended)
+## Build
 
-### Installation
-
-1. **Clone the repository:**
-
-   ```bash
-    git clone https://github.com/saniola/travel-trucks.git
-   ```
-
-2. **Navigate to the project directory:**
-
-   ```bash
-    cd travel-trucks
-   ```
-
-3. **Install dependencies:**
-
-   ```bash
-    npm install
-   ```
-
-4. **Start the development server:**
-
-   ```bash
-    npm run dev
-   ```
-
-5. **Open the application:**
-
-Navigate to `http://localhost:5173` in your browser.
+```bash
+npm run build
+```
