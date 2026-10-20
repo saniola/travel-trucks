@@ -9,7 +9,7 @@ import {
   selectFilters,
   selectLocation,
 } from '../../redux/filtersSlice';
-import { resetCampers, filterCampers } from '../../redux/campersSlice';
+import { filterCampers } from '../../redux/campersSlice';
 import styles from './SearchForm.module.scss';
 
 const SearchForm = () => {
